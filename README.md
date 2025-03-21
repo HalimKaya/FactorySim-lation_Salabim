@@ -4,12 +4,12 @@ Bu proje, üretim süreçlerini simüle eden bir model içerir. salabim kütüph
 🔧 Gerekli Kütüphanelerin Kurulumu
 Bu projeyi çalıştırmadan önce aşağıdaki kütüphanelerin yüklü olduğundan emin olun:
 
-pip install salabim pandas matplotlib
+'''pip install salabim pandas matplotlib'''
 
 ▶️ Simülasyonu Çalıştırma
 Kod dosyasını çalıştırarak simülasyonu başlatabilirsiniz:
 
-#python main.py
+'''python main.py'''
 
 📊 Veri Tablosu Açıklaması ve Kullanımı
 Kodun başında üretim sürecini tanımlayan bir tablo (data değişkeni) bulunmaktadır. Bu tablo, makinelerin hangi ürünü ürettiğini, üretim süresini, gerekli girdileri ve üretim akışını tanımlar.
