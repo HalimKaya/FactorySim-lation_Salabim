@@ -9,7 +9,7 @@ pip install salabim pandas matplotlib
 ▶️ Simülasyonu Çalıştırma
 Kod dosyasını çalıştırarak simülasyonu başlatabilirsiniz:
 
-python main.py
+#python main.py
 
 📊 Veri Tablosu Açıklaması ve Kullanımı
 Kodun başında üretim sürecini tanımlayan bir tablo (data değişkeni) bulunmaktadır. Bu tablo, makinelerin hangi ürünü ürettiğini, üretim süresini, gerekli girdileri ve üretim akışını tanımlar.
