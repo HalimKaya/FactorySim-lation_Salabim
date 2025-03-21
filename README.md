@@ -25,3 +25,43 @@ Aşağıdaki tabloyu örnek olarak kullanabilirsiniz:
 | C      | C            | 1                  | A, B                 | A:2, B:1            | D                 |
 | D      | Nihai Ürün   | 2                  | C                    | C:1                 | -                 |
 
+
+
+
+## 🔧 Üretim Simülasyonu Kodu
+
+Aşağıdaki Python kodu, üretim süreçlerini simüle etmek için **salabim** kütüphanesini kullanır.  
+Grafiklerle üretim sürecini, buffer (ara stok) durumunu ve makine verimliliğini analiz etmektedir.
+
+```python
+import salabim as sim
+import pandas as pd
+import matplotlib.pyplot as plt
+
+sim.yieldless(False)  # selects not yieldless
+
+# Üretim sürecini tanımlayan tablo
+data = {
+    "Makine": ["A", "B", "C", "D"],
+    "Ürettiği Ürün": ["A", "B", "C", "Nihai Ürün"],
+    "Üretim Süresi": [1, 1, 1, 2],
+    "Gerekli Girdi Ürünler": [None, None, ["A", "B"], ["C"]],
+    "Beklenen Girdi Adedi": [None, None, {"A": 2, "B": 1}, {"C": 1}],
+    "Gönderilen Makine": ["C", "C", "D", None],
+}
+
+df = pd.DataFrame(data)
+
+class Machine(sim.Component):
+    def setup(self, machine_name):
+        self.machine_name = machine_name
+        self.process_time = df.loc[df["Makine"] == machine_name, "Üretim Süresi"].values[0]
+
+    def process(self):
+        while True:
+            yield self.hold(self.process_time)
+            print(f"{env.now()} dk: {self.machine_name} makinesi üretimi tamamladı.")
+
+env = sim.Environment(time_unit="minutes")
+machines = {row["Makine"]: Machine(machine_name=row["Makine"]) for _, row in df.iterrows()}
+env.run(till=30)
